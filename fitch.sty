@@ -1,0 +1,112 @@
+%% fitch.sty
+
+%% Written by Delia Graff Fara: Last updated 5 November 01 
+%% delia.graff@cornell.edu
+
+%% To use: put \usepackage{fitch} in preamble.
+
+%  This is a very rough and ready LaTeX2e macro that lets one draw
+%  fitch-style proofs (following the style of Barwise and Etchemndy's
+%  _Language, Proof and Logic_ textbook).  There's lots of room for
+%  improvement here; suggestions and comments are welcome!
+
+
+
+
+%  The new commands are: 
+%  \begin{fitchproof}   
+%  \end{fitchproof}
+%  \subproof{}
+%  \fitchline[]{}{}
+%  \fitchsep[]
+
+
+
+%  This is the format:
+
+%  \begin{fitchproof} starts a new fitch-style proof.  
+%  \end{fitchproof}  ends the proof.
+
+%  Between these command, use:
+ 
+%  \fitchline[<lab>]{<frmla>}{<rule:nums>} to create a sequentially
+%  numbered line on which the formula <frmla> is obtained by the rule
+%  and line numbers <rule:nums>.  (Leave last pair of braces empty if no
+%  rule has been used, as with premises in the Barwise & Etchemendy
+%  system.)  The optional argument allows one to tag a line for later
+%  cross-reference. 
+
+%  \fitchsep[<num>] to create a separator line after premises.  <num> is
+%  an optional argument.  Use it to get the separator lines to be of the
+%  right length (if necessary).  When used, it should be filled in with
+%  the last line number of the proof or subproof that separator is in.
+
+%  \subproof{\fitchline{}{} ... \fitchline{}{} \fitchsep \fitchline{}{}}
+%  starts a subproof within a fitchproof.  It may itself contain
+%  subproofs.
+
+
+%%%%%%%%%%%%%%%  EXAMPLE  %%%%%%%%%%%%%%%%%
+%
+% \begin{fitchproof}
+%   \fitchline{$A \rightarrow B$}{}
+%   \fitchline[cond]{$B \rightarrow C$}{}
+%   \fitchsep[10]
+%   \subproof{
+%     \fitchline[disj]{$A \vee B$}{}
+%     \fitchsep
+%     \subproof{
+%       \fitchline{$A$}{}
+%       \fitchsep
+%       \fitchline{$B$}{$\rightarrow$ ELIM: 1,4}
+%       \fitchline{$C$}{$\rightarrow$ ELIM: \ref{cond},5}
+%     }
+%     \subproof{
+%       \fitchline{$B$}{}
+%       \fitchsep
+%       \fitchline{$C$}{$\rightarrow$ ELIM: \ref{cond},7}
+%     }
+%     \fitchline{$C$}{$\vee$ ELIM: \ref{disj},4--6,7-8}
+%   }
+%   \fitchline{$(A \vee B) \rightarrow C$}{$\rightarrow$ INTRO: \ref{disj}--9}
+%  \end{fitchproof}
+
+
+
+\usepackage{ifthen}
+
+\newcounter{fitch} 
+
+\newcommand{\fitchlabel}[1]%
+{\addtocounter{fitch}{-1}\refstepcounter{fitch}\label{#1}}%
+
+\newenvironment{fitchproof}%
+%%%% \begin{fitchproof} commands %%%%
+{\addtolength{\tabcolsep}{-.75ex}%
+\renewcommand{\arraystretch}{.75}%
+\setcounter{fitch}{0}%
+\begin{tabular}[t]{|lrlp{10em}l}}%
+%%%% \end{fitchproof} commands %%%%
+{\end{tabular}}
+
+
+\newcommand{\fitchline}[3][]%
+{& \stepcounter{fitch}\fitchlabel{#1}\arabic{fitch}. & #2 & & #3\\}
+
+\newcommand{\fitchsep}[1][2]%
+{\makebox[\tabcolsep][r]{\rule[.5ex]{2\tabcolsep}{\arrayrulewidth}}
+& \makebox[\tabcolsep][r]%
+{\ifthenelse{#1<10}
+  {\rule[.5ex]{5.6\tabcolsep}{\arrayrulewidth}}
+  {\ifthenelse{#1<100}
+    {\rule[.5ex]{6.2\tabcolsep}{\arrayrulewidth}}
+    {\rule[.5ex]{8.1\tabcolsep}{\arrayrulewidth}}
+  }
+} & & & \\}
+
+
+\newcommand{\subproof}[1]%
+{& 
+\multicolumn{3}{l}{\parbox[b]{15em}{\ \\ \vspace{-.5\baselineskip} \
+    \\\begin{tabular}[t]{|lrlp{10em}l}#1\end{tabular}}} & \\ & & & &\\
+}
