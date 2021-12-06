@@ -1,0 +1,439 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{float}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[dvips]{graphicx}
+%\usepackage{a4wide}
+\usepackage{epsfig}
+\usepackage{fancybox}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{latexsym}
+\usepackage{alltt}
+\usepackage{amssymb}
+\usepackage{amsmath,amsthm}
+\usepackage{bm}
+\usepackage{wasysym}
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[dvips]{graphicx}
+\usepackage{fancybox}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{latexsym}
+\usepackage{alltt}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{fitch}  % to use fitch
+\usepackage{float}
+\usepackage[hmargin=3cm,vmargin=5.0cm]{geometry}
+%\topmargin=0cm
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+%\setlength{\leftmargin}{-5cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+
+%\usepackage{fullpage}
+%\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[hmargin=2cm,vmargin=3.0cm]{geometry}
+%\topmargin=0cm
+%\topmargin=-1.8cm
+%\addtolength{\textheight}{6.5cm}
+%\addtolength{\textwidth}{2.0cm}
+%\setlength{\leftmargin}{-3cm}
+%\setlength{\oddsidemargin}{0.0cm}
+%\setlength{\evensidemargin}{0.0cm}
+
+%misc libraries goes here
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{automata,positioning}
+
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage[most]{tcolorbox}
+
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black]{hyperref}
+
+
+\lstdefinestyle{customtex}{
+    %backgroundcolor=\color{lbcolor},
+    tabsize=2,
+    language=TeX,
+    numbers=none,
+    basicstyle=\footnotesize\ttfamily,
+    numberstyle=\footnotesize,
+    aboveskip={0.0\baselineskip},
+    belowskip={0.0\baselineskip},
+    %
+    columns=flexible,
+    keepspaces=true,
+    fontadjust=true,
+    upquote=true,
+    %
+    breaklines=true,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    %
+    %identifierstyle=\color[rgb]{0,0.2,0.8},
+    identifierstyle=\color[rgb]{0,0,0.5},
+    %identifierstyle=\color[rgb]{0.133,0.545,0.133},
+    %keywordstyle=\color[rgb]{0.8,0,0},
+    %keywordstyle=\color[rgb]{0.133,0.545,0.133},
+    keywordstyle=\color[rgb]{0,0,0.5},
+    %commentstyle=\color[rgb]{0.133,0.545,0.133},
+    commentstyle=\color[rgb]{0.545,0.545,0.545},
+    %stringstyle=\color[rgb]{0.827,0.627,0.133},
+    stringstyle=\color[rgb]{0.133,0.545,0.133},
+    %
+    literate={â}{{\^{a}}}1 {Â}{{\^{A}}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ğ}{{\u{g}}}1 {Ğ}{{\u{G}}}1 {ı}{{\i}}1 {İ}{{\.{I}}}1   {ö}{{\"o}}1 {Ö}{{\"O}}1 {ş}{{\c{s}}}1 {Ş}{{\c{S}}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1 {~}{$\sim$}{1}
+}
+
+\lstdefinestyle{output}{
+    %backgroundcolor=\color{lbcolor},
+    tabsize=2,
+    numbers=none,
+    basicstyle=\footnotesize\ttfamily,
+    numberstyle=\footnotesize,
+    aboveskip={0.0\baselineskip},
+    belowskip={0.0\baselineskip},
+    %
+    columns=flexible,
+    keepspaces=true,
+    fontadjust=true,
+    upquote=true,
+    %
+    breaklines=true,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    %
+    %identifierstyle=\color[rgb]{0.44,0.12,0.1},
+    identifierstyle=\color[rgb]{0,0,0},
+    keywordstyle=\color[rgb]{0,0,0},
+    commentstyle=\color[rgb]{0,0,0},
+    stringstyle=\color[rgb]{0,0,0},
+    %
+    literate={â}{{\^{a}}}1 {Â}{{\^{A}}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ğ}{{\u{g}}}1 {Ğ}{{\u{G}}}1 {ı}{{\i}}1 {İ}{{\.{I}}}1   {ö}{{\"o}}1 {Ö}{{\"O}}1 {ş}{{\c{s}}}1 {Ş}{{\c{S}}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1
+}
+
+\lstset{style=customtex}
+
+
+\tikzset{%
+    terminal/.style={draw, rectangle,
+    				 align=center, 
+					 minimum height=1cm, 
+					 minimum width=2cm,
+					 fill=black!10,
+					 anchor=mid},
+    nonterminal/.style={draw, rectangle,
+    					align=left,
+					    minimum height=1cm, 
+						minimum width=2cm, 
+						anchor=mid},% and so on
+}
+
+%% Style for terminals
+%\tikzstyle{terminal}=[draw, rectangle, 
+%					  minimum height=1cm, 
+%					  minimum width=2cm, 
+%					  fill=black!20,
+%					  anchor=south west]
+%% Style for nonterminals
+%\tikzstyle{nonterminal}=[draw, rectangle, 
+%						 minimum height=1 cm, 
+%						 minimum width=2 cm, 
+%						 anchor=north east]
+
+
+\newcommand{\HRule}{\rule{\linewidth}{1mm}}
+\newcommand{\kutu}[2]{\framebox[#1mm]{\rule[-2mm]{0mm}{#2mm}}}
+\newcommand{\gap}{ \\[1mm] }
+
+\newcommand{\Q}{\raisebox{1.7pt}{$\scriptstyle\bigcirc$}}
+\newcommand{\minus}{\scalebox{0.35}[1.0]{$-$}}
+
+\setlength{\fboxsep}{10pt}
+
+\tcbsetforeverylayer{enhanced jigsaw, breakable, arc=0mm, boxrule=1pt, boxsep=5pt, after=\vspace{1em}, colback=white, colframe=black}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\setlength\parindent{0pt}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%\renewcommand\arraystretch{1.2}
+
+\newenvironment{Tab}[1]
+  {\def\arraystretch{1}\tabular{#1}}
+  {\endtabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Discrete Computational Structures \\ Take Home Exam 1}
+\author{Ilgaz ŞENYÜZ \\ 2375764} % write your name and id
+\date{} % do not write any date
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\HRule\\
+Middle East Technical University \hfill Department of Computer Engineering
+{\let\newpage\relax\maketitle}
+\HRule\\
+\vspace{1cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Write your answers below the section tags
+\section*{Question 1 \hfill \normalfont{(25 pts)}}
+
+\tab \textbf{a)} Given the sets A and B, prove that
+\begin{equation*}
+(A \cup B) - (A \cap B) = (A - B) \cup (B - A)
+\end{equation*} 
+\tab using set membership notation and logical equivalences. Show each step clearly. \\ \\ \\
+We must show both \begin{equation*}
+(A \cup B) - (A \cap B) \subseteq (A - B) \cup (B - A)
+\end{equation*} 
+and \begin{equation*}
+ (A - B) \cup (B - A) \subseteq 
+(A \cup B) - (A \cap B) \end{equation*} 
+
+\begin{tcolorbox}
+1)
+Suppose  x $\in  (A \cup B) - (A \cap B)$ \\
+
+2) By the definition of difference
+\begin{displaymath}
+ x \in (A \vee B) \wedge x \not\in (A \cap B)
+\end{displaymath}
+
+3) By the defination of union and intersection
+\begin{displaymath}
+ (x \in A \vee  x \in B) \wedge \neg(x \in A \wedge x\in B)
+\end{displaymath}
+4) By using De Morgan's Law for propositions
+\begin{displaymath}
+(x \in A \vee  x \in B) \wedge (\neg (x \in A) \wedge \neg(x\in B))
+\end{displaymath}
+5) By the definition of $\not\in$
+\begin{displaymath}
+(x \in A \vee  x \in B) \wedge ( x \not\in A \vee x \not\in B)
+\end{displaymath}
+6) Using Distributive Law 
+\begin{displaymath}
+((x \in A \vee  x \in B) \wedge x\not\in A) \vee ((x \in A \vee  x \in B) \wedge x\not\in B)
+\end{displaymath}
+7) Using Distributive Law x2
+\begin{displaymath}
+[(x \in A \wedge x \not\in A) \vee (x \in B \wedge x \not\in A)] \vee [(x \in A \wedge x \not\in B) \vee (x \in B \wedge x \not\in B)]
+\end{displaymath}
+8) Using Complement Laws
+\begin{displaymath}
+[\varnothing \vee (x \in B \wedge x \not\in A)] \vee [(x \in A \wedge x \not\in B) \vee \varnothing]
+\end{displaymath}
+9) Using Identity Law
+\begin{displaymath}
+ (x \in B \wedge x \not\in A) \vee (x \in A \wedge x \not\in B)
+\end{displaymath}
+10) By the definition of difference x2
+\begin{displaymath}
+(1)x\in(B-A) \vee (2)x \in (A-B)
+\end{displaymath}
+11) Using Commutative Law
+\begin{displaymath}
+(2)x \in (A-B) \vee  (1)x\in(B-A)
+\end{displaymath}
+12) By the definition of union
+\begin{displaymath}
+(A - B) \cup (B - A)
+\end{displaymath}
+Therefore $(A \cup B) - (A \cap B) \subseteq (A - B) \cup (B - A)$
+\end{tcolorbox}
+
+\begin{tcolorbox}
+1)
+Suppose  x $\in  (A - B) \cup (B - A)$ \\
+
+2) By the definition of union
+\begin{displaymath}
+x\in(A-B) \vee x \in (B-A)
+\end{displaymath}
+
+3) By the definition of difference x2
+\begin{displaymath}
+ (x \in A \wedge x \not\in B) \vee  (x \in B \wedge x \not\in A) 
+\end{displaymath}
+4) Using Distribution Law 
+\begin{displaymath}
+((x\in A \wedge x\not\in B) \vee x \in B) \wedge ((x\in A \wedge x\not\in B) \vee x \not\in A) 
+\end{displaymath}
+5) Using Distribution Law x2
+\begin{displaymath}
+[(x\in A \vee x \in B) \wedge (x\not\in B \vee x\in B)] \wedge
+[(x\in A \vee x \not\in A) \wedge (x\not\in B \vee x\not\in A)]
+\end{displaymath}
+6) Using Complement Law x2
+\begin{displaymath}
+[(x\in A \vee x \in B) \wedge U] \wedge
+[U \wedge (x\not\in B \vee x\not\in A)]
+\end{displaymath}
+7) Using Identity Law x2
+\begin{displaymath}
+(x\in A \vee x \in B) \wedge
+(x\not\in B \vee x\not\in A)
+\end{displaymath}
+8) By the definition of $\not\in$
+\begin{displaymath}
+(x \in A \vee  x \in B) \wedge (\neg (x \in B) \vee \neg(x\in A))
+\end{displaymath}
+9) By the definition of De Morgan's Law for propositional logic
+\begin{displaymath}
+(x \in A \vee  x \in B) \wedge \neg (x \in B \wedge x\in A)
+\end{displaymath}
+10) By the definition of Union and Intersection
+\begin{displaymath}
+ x \in (A \cup B) \wedge x \not\in (B \cap A)
+\end{displaymath}
+11) Using Commutative Law
+\begin{displaymath}
+ x \in (A \cup B) \wedge x \not\in (A \cap B)
+\end{displaymath}
+12) By the definition of difference
+\begin{displaymath}
+ (A \cup B)-(A \cap B)
+\end{displaymath}
+Therefore $(A - B) \cup (B - A) \subseteq (A \cup B) - (A \cap B)$
+\end{tcolorbox}
+
+Hence, $
+(A \cup B) - (A \cap B) = (A - B) \cup (B - A)
+$
+
+\newpage
+
+
+
+\newpage
+\section*{Question 2 \hfill \normalfont{(25 pts)}}
+Prove that the set
+
+\{f $|$ f : N $\rightarrow$ \{0, 1\}, f is a function\} - \{f $|$ f : \{0, 1\} $\rightarrow$ N, f is a function\}
+is uncountable. \\\\
+Let say X to the set : \{f $|$ f : N $\rightarrow$ \{0, 1\}, f is a function\} \\\\
+Let say Y to the set : \{f $|$ f : \{0, 1\} $\rightarrow$ N, f is a function\}
+
+\begin{tcolorbox}
+Any function f, where N $\rightarrow$ \{0, 1\} means the set of all binary strings. \\ I will show that this set is uncountable by the diagonalization argument.\\ The set X \{includes a1, a2, a3 ...\} where: \\
+a1= a.11 a.12 a.13 ... \\
+a2= {a.21 a.22 a.23 ... \\
+a3= a.31 a.32 a.33 ... \\
+... goes on like this (any enumeration)\\
+And there exists a binary string b = b1 b2 b3 ... such that: \\
+b.i $\neq$ a.ii, For instance b.i = 0 if a.ii = 1, and b.i = 1 if a.ii = 0 \\
+b $\neq $ ai, i $\in N$ (a1, a2, a3 ...) \\ \\
+Therefore there does not exist an enumeration counting each
+element in X \\\\
+Hence the set X is UNCOUNTABLE.
+
+\end{tcolorbox}
+
+
+\begin{tcolorbox}
+Any function f, where \{f $|$ f : \{0, 1\} $\rightarrow$ N, is determined by its values at 0 and 1, f(0) and f(1). f(0) can be any Natural number so does f(1). Therefore f is actually cartesian product of two sets with cardinality of N. Lets enumarate these sets as \{a1,a2,a3...\} and \{b1,b2,b3...\}. I arrange these elements in an infinite matrix and use "zigzag" method to traverse this matrix. For instance $\{(a1,b1), (a2,b1), (a1,b2), (a3,b1), (a2,b2), (a1,b3)...\}$. Hence f is countable. \\\\ Therefore the set Y is COUNTABLE.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}
+By the previous two boxes, X is UNCOUNTABLE, and Y is COUNTABLE.\\\\
+Assume X - Y is countable.\\
+The union of countably many countable sets is countable; thus (X-Y)$\cup$Y is countable. (1)\\
+Since X \subset (X-Y)$\cup$Y , then X must be countable too.
+$\bot$But it can not be, becuase we know that X is uncountable.\\\\
+
+Therefore  X - Y is UNCOUNTABLE\\
+
+(Proof of (1): \\
+Since (X-Y) is countable, we can enumerate (X-Y)=\{a1,a2,a3,...\}.\\
+Since Y is countable we can enumerate Y=\{b1,b2,...\}\\
+And now we can enumerate (X-Y)$\cup$Y as \{a1,b1,a2,b2,...\} and thus 
+(X-Y)$\cup$Y is countable.) \\ \\
+
+
+
+\end{tcolorbox}
+
+In the previous box, it is shown that X-Y which is  \{f $|$ f : N $\rightarrow$ \{0, 1\}, f is a function\} - \{f $|$ f : \{0, 1\} $\rightarrow$ N, f is a function\} is UNCOUNTABLE
+
+\newpage
+\section*{Question 3)\hfill \normalfont{25pts}}
+Prove that $f(n) = 4^n +5n^2 logn $ is not $O(2^n)$
+
+\begin{center}
+\begin{tcolorbox}
+    Definition: f(x) is O(g(x)) if there exists such constants c and k such that f(x) $f(x) \le c \cdot g(x)$ where $x \ge k $  \\ \\
+    Assume $f(n) = 4^n +5n^2 logn $ is  $O(2^n)$, and $n>1$\\
+    $\frac{f(n)}{g(n)} \le c,$ where $\frac{f(n)}{g(n)}$ = $\frac{2^{2n}+5n^2logn}{2^n} = 2^n + \frac{5n^2logn}{2^n}$\\ \\
+    Since $x > 1$, \tab $2^n + \frac{5n^2logn}{2^n} > 2^n +0 = 2^n$\\ \\
+    $n > \log_2(c)$ implies $2^n > c$ and $f(n) > c \cdot 2^n$ \\ \\
+    $\bot$ Contradiction with the definition of the Big O Notation  \\ \\
+    Therefore when $n > 1, n > k$, and $n > \log_2(c)$ f(n)$> c\cdot 2^n$ which contradicts with the definition of the Big O Notation. \\\\
+    $f(n) = 4^n +5n^2 logn $ is NOT $O(2^n)$
+\end{tcolorbox}
+\end{center}
+\noindent
+\newline
+
+\newpage
+
+\newpage
+\section*{Question 4) \hfill \normalfont{25pts}}
+\tab 
+
+\begin{center}
+\begin{equation*}
+    x>2, n>2, (2x-1)^n-x^2 \equiv -x-1 (mod(x-1))
+\end{equation*}
+Determine the value of x
+\begin{tcolorbox}
+$
+    1 \tab 2x-1 = 1+(2\cdot(x-1)) \hfill \normalfont{}\\ \\
+    2 \tab 2x-1\equiv 1 (mod(x-1)) \hfill \normalfont{( 1)}\\ \\
+    3  \tab x\equiv 1 (mod(x-1))\hfill \normalfont{( 2)}\\ \\
+    4 \tab   (2x-1)^n-x^2 \equiv 1^n - 1^2 \hfill \normalfont{(2,3)}\\ \\
+    5  \tab 0 \equiv -x -1 (mod(x-1)) \hfill \normalfont{(Premise,4)}\\ \\
+    6  \tab x+1 \equiv 0 (mod(x-1)) \hfill \normalfont{(5)}\\ \\
+   7 \tab 2 \equiv 0 (mod(x-1)) \hfill \normalfont{(3,6)} \\ \\
+   8 \tab 2 \equiv x-1 (mod(x-1)) \hfill \normalfont{(7)} \\ \\
+      9 \tab x =  3  \hfill \normalfont{(x>2,8)} \\ \\
+$
+\end{tcolorbox}
+\end{center}
+
+
+\noindent
+\newline
+
+
+
+\end{document}
